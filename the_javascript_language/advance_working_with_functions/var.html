@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        var variables have no block scope; their visibility is scoped to current function, or global, if declared outside function.
+        var declarations are processed at function start (script start for globals).
+        */
+
+        function sayHi() {
+        if (true) {
+            var phrase = "Hello";
+        }
+
+        alert(phrase); // works
+        }
+
+        sayHi();
+        alert(phrase); // Error: phrase is not defined
+
+        //Declarations are hoisted, but assignments are not.
+        
+    </script>
+</body>
+</html>

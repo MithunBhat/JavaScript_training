@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*There are 3 types of quotes('', "", ``). Backticks allow a string to span 
+        multiple lines and embed expressions ${…}.*/
+
+        let str1 = 'Hi, \n my name is john'; // "\n" is a special new line characters there are others as well
+
+        // '\' can be used to cancel the special characters
+
+        alert(str1[1]); //[] can be use to get a perticular char from a string, output 'i'
+
+        alert('hi bye'.length); //6
+        alert(str1.length); //length of the string str1
+
+        //changing case
+        alert('Mithun'.toLowerCase()); //mithun
+        alert('Mithun'.toUpperCase()); //MITHUN
+
+        //searching subString
+            //outputs index
+            //syntax actualString.indexOf(subString, [start_position])
+
+            //outputs boolean(true or false)
+            //syntax actualString.includes(subString, [start_position])
+            //syntax actualString.startsWith(subString)
+            //syntax actualString.endsWith(subString)
+
+    </script>
+</body>
+</html>

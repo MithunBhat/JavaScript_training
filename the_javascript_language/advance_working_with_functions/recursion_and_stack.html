@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //executuion contex stores the process of execution of a running function
+        function sumUpTo(maxNum) {
+            if (maxNum == 1) {
+                return 1;
+            }
+            /*when nested call happens current func is paused
+            and it's EC is stored in EC stack*/
+            return maxNum + sumUpTo(maxNum - 1); //the nested call executes
+
+            /*when it ends the previous EC is retrived from the stack and
+            it starts executing*/
+        }
+
+        console.log(sumUpTo(4));
+        console.log(sumUpTo(7));
+        console.log(sumUpTo(10));
+    </script>
+</body>
+</html>

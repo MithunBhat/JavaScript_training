@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        JSON.stringify to convert objects into JSON.
+        JSON.parse to convert JSON back into an object.
+        */
+
+        //stringify
+        let student = {
+        name: 'John',
+        age: 30,
+        isAdmin: false,
+        courses: ['html', 'css', 'js'],
+        wife: null
+        };
+
+        let json = JSON.stringify(student); //The method JSON.stringify(student) takes the object and converts it into a string.
+
+        //parse
+        let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
+
+        let user = JSON.parse(userData);
+
+alert( user.friends[1] ); // 1
+    </script>
+</body>
+</html>

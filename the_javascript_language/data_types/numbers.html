@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //javascript support numbers ranging from -2^53 to 2^53
+
+        let num = 75;
+        //to represent large or very small +ve decimal numbers we can simply write
+        let num1 = 2e6; //2000000
+        let num2 = 2e-6; //0.000002
+
+        //hexadecimal
+        let num3 = 0xaa; //170
+
+        //octal
+        let num4 = 0o225; //149
+
+        //binary
+        let num5 = 0b11101011; //235
+
+        //to convert from on base to another
+        let num6 = num.toString(16); //4b
+        //where 16 is the base
+        console.log(num6);
+
+        //rounding
+
+            //Math.floor converts to lower round value i.e 3.1 -> 3
+            //Math.ceil converts to upper rount value i.e 3.1 -> 4
+            //Math.round converts depending on the fraction value i.e 3.3 -> 3 & 3.6 -> 4
+
+        //isFinite & isNaN converts to intiger and checks weather finite or null
+
+        //parseInt & parseFloat converts a given value to intiger and ommits any non intiger value.
+
+    </script>
+</body>
+</html>

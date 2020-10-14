@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>welcome</h1>
+    <script>
+
+        class CoffeeMachine {
+            waterAmount = 0;
+
+            set waterAmount(value) {
+                if (value < 0) throw new Error("Negative water");
+                this.waterAmount = value;
+            }
+
+            get waterAmount() {
+                return this.waterAmount;
+            }
+
+            constructor(value) {
+                this.waterAmount = value;
+            }
+
+        }
+
+        // create the coffee machine
+        let coffeeMachine = new CoffeeMachine();
+        coffeeMachine.waterAmount = -1;
+        console.log(coffeeMachine.waterAmount);
+    </script>
+</body>
+</html>

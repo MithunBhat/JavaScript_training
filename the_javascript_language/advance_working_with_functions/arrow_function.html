@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //this keyword, to access the object, a method can use the this keyword.
+        //The value of this is the object “before dot”, the one used to call the method.
+        user.sayHi(); // John
+
+        let cust = { name: "John" };
+        let admin = { name: "Admin" };
+
+        function sayHi() {
+            alert( this.name );
+        }
+
+        // use the same function in two objects
+        cust.f = sayHi;
+        admin.f = sayHi;
+
+        // these calls have different this
+        // "this" inside the function is the object "before the dot"
+        cust.f(); // John  
+        admin.f(); // Admin
+
+        /*
+        arrow function don’t have their “own” this. 
+        If we reference this from such a function, it’s taken from the outer “normal” function.
+        */
+        let user = {
+            firstName: "Ilya",
+            sayHi() {
+                let arrow = () => alert(this.firstName);
+                arrow();
+            }
+        };
+        user.sayHi(); // Ilya
+    
+        //another example
+        let group = {
+            title: "Our Group",
+            students: ["John", "Pete", "Alice"],
+
+            showList() {
+                this.students.forEach(
+                student => alert(this.title + ': ' + student) //if we used regular function, there would be error
+            );
+            }
+        };
+
+        group.showList();
+
+        //difference between arrow and regular function
+        
+        //lack of 'this' in arrow func
+        //argument objects are not available in arrow func
+        let user1 = {
+            show() {
+                console.log(arguments); //when use arrow function throws error 
+            }
+        };
+        user.show(1,2,3,4);
+        // regular func are 'constructable' and 'callable' but arrow func are only 'callable'
+        let x = () => {
+            console.log(arguments)
+        }
+        new x(1,2,3,4); //error not a constructor
+    </script>
+</body>
+</html>

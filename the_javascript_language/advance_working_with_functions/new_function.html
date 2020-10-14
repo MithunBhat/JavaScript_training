@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //syntax
+        //let func = new Function ([arg1, arg2, ...argN], functionBody);
+        let sum = new Function('a', 'b', 'return a + b');
+
+        alert( sum(1, 2) ); // 3
+
+        /*
+        But new Function allows to turn any string into a function. For example, 
+        we can receive a new function from a server and then execute it:
+        */
+
+        /*
+        Functions created with new Function, have [[Environment]] referencing the global Lexical Environment,
+        not the outer one. Hence, they cannot use outer variables.
+        */
+
+        function getFunc() {
+            let value = "test";
+
+            let func = new Function('alert(value)');
+
+            return func;
+        }
+
+        getFunc()(); // error: value is not defined
+    </script>
+</body>
+</html>

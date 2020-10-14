@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //problem of losing 'this'
+        let user = {
+            firstName: "John",
+            sayHi() {
+                alert(`Hello, ${this.firstName}!`);
+            }
+        };
+
+        setTimeout(user.sayHi, 1000); // Hello, undefined!
+        //The method setTimeout in-browser is a little special: it sets this=window for the function call 
+        
+
+        //solution using bind
+        /*
+        syntax
+        let boundFunc = func.bind(context, [arg1], [arg2], ...);
+        */
+        let user = {
+            firstName: "John",
+            sayHi() {
+                alert(`Hello, ${this.firstName}!`);
+            }
+        };
+
+        let sayHi = user.sayHi.bind(user); // (*)
+
+        // can run it without an object
+        sayHi(); // Hello, John!
+
+        setTimeout(sayHi, 1000); // Hello, John!
+    </script>
+</body>
+</html>

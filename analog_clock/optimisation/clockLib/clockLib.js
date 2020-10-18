@@ -1,53 +1,114 @@
-export class clockLib {
-    hourHand = document.querySelector('.hand-hour');
-    minuteHand = document.querySelector('.hand-minute');
-    secondHand = document.querySelector('.hand-seconds');
+export function clockLib(id) {
+    var clock = this;
+    var timeout;
+    var time;
+    var currentTime = new Date();
 
-    constructor(delayHours = 0, delayMinutes = 0, delaySeconds = 0, speed = 0) {
-        this.hours = 0;
-        this.minutes = 0;
-        this.seconds = 0;
+    this.displayClock = displayClock;
+    this.stop = stop;
+    this.start = start;
 
-        this.delayHours = delayHours;
-        this.delayMinutes = delayMinutes;
-        this.delaySeconds = delaySeconds;
-        this.speed = speed;
+
+    function displayClock() {
+        loadCSS();
+        var element = document.getElementById(id);
+        var div = document.createElement('div');
+        div.setAttribute('class', 'clock');
+        div.innerHTML = `
+            <div class="clock-face number1">1</div>
+            <div class="clock-face number2">2</div>
+            <div class="clock-face number3">3</div>
+            <div class="clock-face number4">4</div>
+            <div class="clock-face number5">5</div>
+            <div class="clock-face number6">6</div>
+            <div class="clock-face number7">7</div>
+            <div class="clock-face number8">8</div>
+            <div class="clock-face number9">9</div>
+            <div class="clock-face number10">10</div>
+            <div class="clock-face number11">11</div>
+            <div class="clock-face number12">12</div>
+            <div class="hand hand-hour"></div>
+            <div class="hand hand-minute"></div>
+            <div class="hand hand-seconds"></div>
+        `;
+        element.appendChild(div);
+
+        clock.secondHand = document.querySelector('.hand-seconds');
+        clock.minuteHand = document.querySelector('.hand-minute');
+        clock.hourHand = document.querySelector('.hand-hour');
     }
 
-    compareTime(varOne, varTwo) {
-        if (varOne == varTwo) return false;
-        else {
-            return true;
+
+    function loadCSS() {
+        var cssID = 'clockLibCSS';
+        if (!document.getElementById('clockLibCSS')) {
+            var head = document.getElementsByTagName('head')[0];
+            var link = document.createElement('link');
+            link.id = cssID;
+            link.rel = 'stylesheet';
+            link.type = 'text/CSS';
+            link.href = './clockLib/clockLib.css';
+            head.appendChild(link);
         }
     }
 
-    getTime = () => {
-        const now = new Date();
 
-        if (this.compareTime(this.seconds,(now.getSeconds()+this.delaySeconds))) {
-            this.seconds = now.getSeconds()+this.delaySeconds;
-            const secondsDegree = (this.seconds / 60) * 360;
-            this.secondHand.style.transform = `rotate(${secondsDegree}deg)`
-            console.log('seconds hand moved');
-        }
-
-        if (this.compareTime(this.minutes, (now.getMinutes()+this.delayMinutes))) {
-            this.minutes = now.getMinutes()+this.delayMinutes;
-            const minutesDegree = (this.minutes / 60) * 360;
-            this.minuteHand.style.transform = `rotate(${minutesDegree}deg)`
-            console.log('minute hand moved');
-        }
-
-        if (this.compareTime(this.hours, ((now.getHours()%12)+this.delayHours))) {
-            this.hours = (now.getHours() % 12)+this.delayHours;
-            const hoursDegree = ((this.hours * 5) / 60) * 360;
-            this.hourHand.style.transform = `rotate(${hoursDegree}deg)`;
-            console.log('hour hand moved')
-        }
+    function stop() { 
+        clearTimeout(timeout);
     }
 
-    start() {
-        setInterval(this.getTime, 1000);
+
+    function start(second = currentTime.getSeconds(), 
+        minute = currentTime.getMinutes(), hour = currentTime.getHours(), speed = 1) {
+        timeout = setTimeout(tick, 0);
+        time = Date.now();
+        clock.seconds = second;
+        clock.minutes = minute;
+        clock.hours = hour;
+        clock.speed = speed;
     }
 
+
+    function tick() {
+        time += 1000;
+        timeout = setTimeout(tick, time - Date.now());
+        display();
+        update();
+    }
+
+
+    function display() {
+        var hours = clock.hours;
+        var minutes = clock.minutes;
+        var seconds = clock.seconds;
+
+        const secondsDegree = (seconds / 60) * 360;
+        clock.secondHand.style.transform = `rotate(${secondsDegree}deg)`
+        console.log('seconds hand moved');
+
+        const minutesDegree = (minutes / 60) * 360;
+        clock.minuteHand.style.transform = `rotate(${minutesDegree}deg)`
+        console.log('minute hand moved');
+
+        const hoursDegree = ((hours * 5) / 60) * 360;
+        clock.hourHand.style.transform = `rotate(${hoursDegree}deg)`;
+        console.log('hour hand moved')
+    }
+    
+
+    function update() {
+        var seconds = clock.seconds += clock.speed;
+
+        if (seconds === 60) {
+            clock.seconds = 0;
+            var minutes = ++clock.minutes;
+
+            if (minutes === 60) {
+                clock.minutes = 0;
+                var hours = ++clock.hours;
+
+                if (hours === 12) clock.hours = 0;
+            }
+        }
+    }
 }

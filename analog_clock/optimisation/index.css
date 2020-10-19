@@ -12,11 +12,13 @@ body {
 #india {
     width: 450px;
     height: 450px;
-    background-color: blueviolet;
+    margin: 30px auto;
+    /* background-color: blueviolet; */
 }
 
 #usa {
     width: 450px;
     height: 450px;
-        background-color: seagreen;
+    margin: 30px auto;
+        /* background-color: seagreen; */
     }

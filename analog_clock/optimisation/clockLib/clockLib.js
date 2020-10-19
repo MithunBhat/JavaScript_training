@@ -4,14 +4,19 @@ export function clockLib(id) {
     var time;
     var currentTime = new Date();
 
+    var hours = 0;
+    var minutes = 0;
+    var seconds = 0;
+
+    this.ID = id;
     this.displayClock = displayClock;
     this.stop = stop;
     this.start = start;
+    this.element = document.getElementById(this.ID);
 
 
-    function displayClock() {
+    function displayClock(color) {
         loadCSS();
-        var element = document.getElementById(id);
         var div = document.createElement('div');
         div.setAttribute('class', 'clock');
         div.innerHTML = `
@@ -31,11 +36,13 @@ export function clockLib(id) {
             <div class="hand hand-minute"></div>
             <div class="hand hand-seconds"></div>
         `;
-        element.appendChild(div);
+        this.element.appendChild(div);
+        clock.borderColor = this.element.querySelector("div.clock");
+        clock.borderColor.style.borderColor = color;
 
-        clock.secondHand = document.querySelector('.hand-seconds');
-        clock.minuteHand = document.querySelector('.hand-minute');
-        clock.hourHand = document.querySelector('.hand-hour');
+        clock.secondHand = this.element.querySelector('.hand-seconds');
+        clock.minuteHand = this.element.querySelector('.hand-minute');
+        clock.hourHand = this.element.querySelector('.hand-hour');
     }
 
 
@@ -78,21 +85,37 @@ export function clockLib(id) {
 
 
     function display() {
-        var hours = clock.hours;
-        var minutes = clock.minutes;
-        var seconds = clock.seconds;
 
-        const secondsDegree = (seconds / 60) * 360;
-        clock.secondHand.style.transform = `rotate(${secondsDegree}deg)`
-        console.log('seconds hand moved');
+        var newHours = clock.hours;
+        var newMinutes = clock.minutes;
+        var newSeconds = clock.seconds;
 
-        const minutesDegree = (minutes / 60) * 360;
-        clock.minuteHand.style.transform = `rotate(${minutesDegree}deg)`
-        console.log('minute hand moved');
+        if (compareTime(newSeconds, seconds)) {
+            seconds = newSeconds;
+            const secondsDegree = (seconds / 60) * 360;
+            clock.secondHand.style.transform = `rotate(${secondsDegree}deg)`
+            console.log('seconds hand moved');
+        }
+        
+        if (compareTime(newMinutes ,minutes)) {
+            minutes = newMinutes;
+            const minutesDegree = (minutes / 60) * 360;
+            clock.minuteHand.style.transform = `rotate(${minutesDegree}deg)`
+            console.log('minute hand moved');
+        }
 
-        const hoursDegree = ((hours * 5) / 60) * 360;
-        clock.hourHand.style.transform = `rotate(${hoursDegree}deg)`;
-        console.log('hour hand moved')
+        if (compareTime(newHours, hours)) {
+            hours =  newHours;
+            const hoursDegree = ((hours * 5) / 60) * 360;
+            clock.hourHand.style.transform = `rotate(${hoursDegree}deg)`;
+            console.log('hour hand moved')
+        }
+ 
+    }
+
+    function compareTime(varOne, varTwo) {
+        if (varOne == varTwo) return false;
+        else return true;
     }
     
 

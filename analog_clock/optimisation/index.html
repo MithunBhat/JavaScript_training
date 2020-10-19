@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Tik-Tok</title>
-</head>
-<body>
-    <div id = "india"></div>
 
-    <div id = "usa"></div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="index.css">
+        <title>Tik-Tok</title>
+    </head>
 
-    <script type="module">
-        import {clockLib} from './clockLib/clockLib.js';
+    <body>
+        <div id = "india"></div>
 
-        //syntax and instruction
-        // new clockLib(ID);
-        // .display to load css and clock.
-        // .start(seconds, minutes, hours, speed)
+        <div id = "usa"></div>
 
-        var ISO = new clockLib("india");
-        ISO.displayClock();
-        ISO.start(undefined,30,5);
-        // ISO.stop();
-        
-        let USA = new clockLib("usa");
-        USA.displayClock();
-        // USA.start(undefined,15,7,2);
-        // USA.stop();
-    </script>
+        <script type="module">
+            import {clockLib} from './clockLib/clockLib.js';
 
-</body>
+            //syntax and instruction
+            // new clockLib(ID);
+            // .display to load css and clock. (color of the border)
+            // .start(seconds, minutes, hours, speed)
+
+            var ISO = new clockLib("india");
+            ISO.displayClock('pink');
+            ISO.start();
+            // ISO.stop();
+            
+            var USA = new clockLib("usa");
+            USA.displayClock('red');
+            USA.start(undefined,15,7,2);
+            // USA.stop();
+        </script>
+
+    </body>
 </html>

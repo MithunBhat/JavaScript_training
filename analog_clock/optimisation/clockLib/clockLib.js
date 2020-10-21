@@ -15,7 +15,7 @@ export function clockLib(id) {
     this.element = document.getElementById(this.ID);
 
 
-    function displayClock(color) {
+    function displayClock(color = 'white') {
         loadCSS();
         var div = document.createElement('div');
         div.setAttribute('class', 'clock');

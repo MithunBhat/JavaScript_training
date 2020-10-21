@@ -9,17 +9,38 @@
     </head>
 
     <body>
-        <div id = "india"></div>
+        <form action="" id="formID">
+            <input type="text" id="title" placeholder="Clock title">
+            <input type="text" id="border-color" placeholder="Enter border color">
+            <input type="text" id="hours" placeholder="Enter hours">
+            <input type="text" id="minutes" placeholder="Enter minutes">
+            <input type="text" id="seconds" placeholder="Enter seconds">
+            <input type="text" id="speed" placeholder="Enter speed"><br>
+            <input type="button" id="submit_form" onclick="createNew()" value="CreateNew">
+        </form>
 
-        <div id = "usa"></div>
+        <div class="clockExibition">
+            <div id = "india"></div>
+
+            <div id = "usa"></div>
+
+            <div id="aus"></div>
+        </div>
+
+        <script src="./index.js"></script>
+
+        <!-- syntax and instruction
+        new clockLib(ID);
+        .display to load css and clock. (color of the border)
+        .start(seconds, minutes, hours, speed) -->
 
         <script type="module">
             import {clockLib} from './clockLib/clockLib.js';
-
-            //syntax and instruction
-            // new clockLib(ID);
-            // .display to load css and clock. (color of the border)
-            // .start(seconds, minutes, hours, speed)
+            // var index = counter - 1;
+            // if (flag) {
+            //     var title[index] = new clockLib(titleArr[index]); 
+            //     titleArr[index].displayClock(color);
+            // }
 
             var ISO = new clockLib("india");
             ISO.displayClock('pink');
@@ -30,6 +51,12 @@
             USA.displayClock('red');
             USA.start(undefined,15,7,2);
             // USA.stop();
+
+            // var AUS = new clockLib("aus");
+            // AUS.displayClock('yellow');
+            // AUS.start(undefined,undefined,4,undefined);
+            // USA.stop();
+
         </script>
 
     </body>

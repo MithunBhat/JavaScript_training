@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>tic-tok</title>
+</head>
+
+<body>
+
+    <form action="#">
+        <label for="speed">Enter a speed</label>
+        <input name="speed" id="speed" type="text" value="1"><br>
+        <label for="timezone">Select Timezone</label>
+        <!-- <input name="timezone" id="timezone" type="text" value="IND" ><br> -->
+        <select name="timezone" id="timezone">
+            <option value="IND">India</option>
+            <option value="USA">United states of America</option>
+            <option value="AUS">Australia</option>
+        </select>
+        
+        <input id="submit" type="button" value="submit">
+    </form>
+
+    <div id="container"></div>
+
+    <script type="module" src="./script.js"></script>
+
+</body>
+
+</html>

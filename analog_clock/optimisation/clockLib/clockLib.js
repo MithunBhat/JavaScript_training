@@ -77,6 +77,7 @@ export function clockLib(id) {
 
 
     function tick() {
+        debugger;
         time += 1000;
         timeout = setTimeout(tick, time - Date.now());
         display();

@@ -10,23 +10,27 @@
 
 <body>
 
-    <form action="#">
-        <label for="speed">Enter a speed</label>
-        <input name="speed" id="speed" type="text" value="1"><br>
-        <label for="timezone">Select Timezone</label>
-        <!-- <input name="timezone" id="timezone" type="text" value="IND" ><br> -->
+    <form>
+        <label for="speed">Enter a speed</label><br>
+        <select name="speed" id="speed">
+            <option value="1000">1X</option>
+            <option value="500">2X</option>
+            <option value="250">3X</option>
+        </select><br>
+
+        <label for="timezone">Select Timezone</label><br>
         <select name="timezone" id="timezone">
             <option value="IND">India</option>
             <option value="USA">United states of America</option>
             <option value="AUS">Australia</option>
-        </select>
+        </select><br>
         
         <input id="submit" type="button" value="submit">
     </form>
 
     <div id="container"></div>
 
-    <script type="module" src="./script.js"></script>
+    <script type="module" src="script.js"></script>
 
 </body>
 

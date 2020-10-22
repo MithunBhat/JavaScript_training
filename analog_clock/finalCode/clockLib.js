@@ -13,18 +13,20 @@ export class ClockLib {
     hours = 0;
     minutes = 0;
     seconds = 0;
-    speed = 1;
+    speed = 0;
 
-    timezones = {
-        'IND': [this.currentTime.getHours(),this.currentTime.getMinutes(),this.currentTime.getSeconds()],
-        'USA': [10,30,5],
-        'AUS': [5,45,30]
+    interval;
+    degree;
+
+    timezoneObj = {
+        'IND': [(this.currentTime.getHours()%12),this.currentTime.getMinutes(),this.currentTime.getSeconds()],
+        'USA': [(this.currentTime.getHours()%12)-9, this.currentTime.getMinutes()-30, this.currentTime.getSeconds()],
+        'AUS': [(this.currentTime.getHours()%12)+5,this.currentTime.getMinutes()+30,this.currentTime.getSeconds()]
     };
 
     constructor(speed, timezone) {
       this.speed = speed;
       this.timezone = timezone;
-    //   console.log(this.timezones.timezone[1]);
       this.create();
       this.start();
     }
@@ -56,73 +58,99 @@ export class ClockLib {
     };
 
     start = () => {
-        this.timeout = setTimeout(this.tick(), 0);
-        this.time = Date.now();
-        [this.hours, this.minutes, this.seconds] = this.getZones();
+        [this.hours, this.minutes, this.seconds] = this.getObjValue(this.timezoneObj, this.timezone);
+        setInterval(() => {
+            const secondsRatio = this.seconds++ / 60;
+            const minutesRatio = (secondsRatio + this.minutes) / 60;
+            const hoursRatio = (minutesRatio + this.hours) / 12;
+            this.setRotation(this.secondHand, secondsRatio);
+            this.setRotation(this.minuteHand, minutesRatio);
+            this.setRotation(this.hourHand, hoursRatio);
+            }, this.speed);
     };
 
-    tick = () => {
-        this.time += 1000;
-        this.timeout = setTimeout(this.tick, this.time - Date.now());
-        this.display();
-        this.update();
-    };
-
-    getZones = () => {
-        for (const key in this.timezones) {
-            if (key == this.timezone) {
-                return this.timezones[key];
+    getObjValue = (obj, value) => {
+        for (const key in obj) {
+            if (key == value) {
+                return obj[key];
             }
         }
     };
 
-    display = () => {
-        var newHours = this.hours;
-        var newMinutes = this.minutes;
-        var newSeconds = this.seconds;
+    setRotation = (hand, rotationRatio) => {
+        this.degree = rotationRatio*360;
+        hand.style.transform = `rotate(${this.degree}deg)`;
+    };
 
-        if (this.compareTime(newSeconds, this.seconds)) {
-            this.seconds = newSeconds;
-            const secondsDegree = (this.seconds / 60) * 360;
-            this.secondHand.style.transform = `rotate(${secondsDegree}deg)`
-            console.log('seconds hand moved');
-        }
+
+    // start = () => {
+    //     this.timeout = setTimeout(this.tick(), 0);
+    //     this.time = Date.now();
+    //     [this.hours, this.minutes, this.seconds] = this.getZones();
+    // };
+
+    // tick = () => {
+    //     this.time += 1000;
+    //     this.timeout = setTimeout(this.tick(), this.time - Date.now());
+    //     this.display();
+    //     this.update();
+    // };
+
+    // getZones = () => {
+    //     for (const key in this.timezones) {
+    //         if (key == this.timezone) {
+    //             return this.timezones[key];
+    //         }
+    //     }
+    // };
+
+    // display = () => {
+    //     var newHours = this.hours;
+    //     var newMinutes = this.minutes;
+    //     var newSeconds = this.seconds;
+
+    //     if (this.compareTime(newSeconds, this.seconds)) {
+    //         this.seconds = newSeconds;
+    //         const secondsDegree = (this.seconds / 60) * 360;
+    //         this.secondHand.style.transform = `rotate(${secondsDegree}deg)`
+    //         console.log('seconds hand moved');
+    //     }
         
-        if (this.compareTime(newMinutes ,this.minutes)) {
-            this.minutes = newMinutes;
-            const minutesDegree = (this.minutes / 60) * 360;
-            this.minuteHand.style.transform = `rotate(${minutesDegree}deg)`
-            console.log('minute hand moved');
-        }
+    //     if (this.compareTime(newMinutes ,this.minutes)) {
+    //         this.minutes = newMinutes;
+    //         const minutesDegree = (this.minutes / 60) * 360;
+    //         this.minuteHand.style.transform = `rotate(${minutesDegree}deg)`
+    //         console.log('minute hand moved');
+    //     }
 
-        if (this.compareTime(newHours, this.hours)) {
-            this.hours =  newHours;
-            const hoursDegree = ((this.hours * 5) / 60) * 360;
-            this.hourHand.style.transform = `rotate(${hoursDegree}deg)`;
-            console.log('hour hand moved')
-        }
-    };
+    //     if (this.compareTime(newHours, this.hours)) {
+    //         this.hours =  newHours;
+    //         const hoursDegree = ((this.hours * 5) / 60) * 360;
+    //         this.hourHand.style.transform = `rotate(${hoursDegree}deg)`;
+    //         console.log('hour hand moved')
+    //     }
+    // };
 
-    compareTime(varOne, varTwo) {
-        if (varOne == varTwo) return false;
-        else return true;
-    }
+    // compareTime(varOne, varTwo) {
+    //     if (varOne == varTwo) return false;
+    //     else return true;
+    // }
 
-    update = () => {
-        this.seconds += this.speed;
+    // update = () => {
+    //     this.seconds += (this.speed-1);
 
-        if (this.seconds === 60) {
-            this.seconds = 0;
-            this.minutes += 1;
+    //     if (this.seconds === 60) {
+    //         this.seconds = 0;
+    //         this.minutes += 1;
 
-            if (this.minutes === 60) {
-                this.minutes = 0;
-                this.hours += 1;
+    //         if (this.minutes === 60) {
+    //             this.minutes = 0;
+    //             this.hours += 1;
 
-                if (this.hours === 12) this.hours = 0;
-            }
-        }
-    };
+    //             if (this.hours === 12) this.hours = 0;
+    //         }
+    //     }
+    // };
 
     getElement() {
       return this.element; // the html element of the clock

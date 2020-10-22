@@ -12,6 +12,23 @@ body {
     align-items: center;
 }
 
+select {
+    padding: 8px 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+
+#submit {
+    padding: 8px 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    background-color: lightblue;
+    border: 3px solid white;
+}
+
 .clock {
     width: 300px;
     height: 300px;

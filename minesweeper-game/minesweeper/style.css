@@ -5,14 +5,36 @@
 
 body {
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
 }
 
 .container {
+  width: 100%;
   margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  /* width: 500px; */
+  /* align-content: center; */
+}
+
+table {
+  /* table-layout: fixed; */
   width: 500px;
-  align-content: center;
+}
+
+th {
+  border: 6px solid #ece6c8;  
+  border-color: #f5f3eb #bab7a9 #bab7a9 #fff9db;
+  width: 100%;
+}
+
+tr {
+  display: flex;
+}
+
+td {
+  border: 6px solid #ece6c8;  
+  border-color: #f5f3eb #bab7a9 #bab7a9 #fff9db;
+  width: 100%;
 }
 
 .grid {
@@ -33,6 +55,12 @@ div {
 }
 
 button {
+  padding: 8px;
+  border: 6px solid #ece6c8;  
+  border-color: #f5f3eb #bab7a9 #bab7a9 #fff9db;
+}
+
+select {
   padding: 8px;
   border: 6px solid #ece6c8;  
   border-color: #f5f3eb #bab7a9 #bab7a9 #fff9db;
